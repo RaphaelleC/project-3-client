@@ -4,11 +4,14 @@ function Navbar() {
     <nav className="navbar is-dark">
       <div className="container">
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
-            Home
+          <Link to="/home" className="navbar-item">
+            Home 
           </Link>
-          <Link to="/" className="navbar-item">
-            Link
+          <Link to="/summerActivities" className="navbar-item">
+            Summer Activities
+          </Link>
+          <Link to="/winterActivities" className="navbar-item">
+            Winter Activities
           </Link>
         </div>
       </div>
