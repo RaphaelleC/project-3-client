@@ -35,4 +35,4 @@ function SummerActivitiesIndex() {
 
 }
 
-export default SummerActivitiesIndex()
+export default SummerActivitiesIndex
