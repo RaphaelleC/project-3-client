@@ -1,5 +1,5 @@
 import React from 'react'
-import { getWinterActivities } from '../../lib/api'
+import { getAllActivities } from '../../lib/api'
 
 import ActivityCard from './ActivityCard'
 
@@ -9,7 +9,7 @@ function WinterActivityIndex() {
   React.useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await getWinterActivities()
+        const { data } = await getAllActivities()
         setActivities(data)
       } catch (e) {
         console.log(e)
@@ -18,12 +18,18 @@ function WinterActivityIndex() {
     getData()
   }, [])
 
+  const winterFilteredActivities = activities?.filter((activity) => {
+    return (
+      activity.season.includes('Summer')
+    )
+  })
+
   return (
     <section className="section">
       <div className="container">
         <div className="columns is-multiline">
-          {activities ? (
-            activities.map(activity => <ActivityCard key={activity._id} {...activity} />)
+          {winterFilteredActivities ? (
+            winterFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
           ) : (
             <p>...loading</p>
           )}
