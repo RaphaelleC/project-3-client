@@ -2,8 +2,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './components/common/Home'
 import Navbar from './components/common/Navbar'
-import summerActivities from './components/activities/summerActivities'
-import winterActivities from './components/activities/winterActivities'
+import summerActivitiesIndex from './components/activities/summerActivities/ActivitiesIndex'
+import winterActivitiesIndex from './components/activities/winterActivities/ActivitiesIndex'
 
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/home" component={Home}/>
-        <Route path="/summerActivities" component={summerActivities}/>
-        <Route path="/summerActivities" component={winterActivities}/>
+        <Route path="/summerActivities" component={summerActivitiesIndex}/>
+        <Route path="/summerActivities" component={winterActivitiesIndex}/>
         {/* <Route path="/cheeses/:id" component={CheeseShow} />
         <Route path="/cheeses" component={CheeseIndex} /> */}
       </Switch>
