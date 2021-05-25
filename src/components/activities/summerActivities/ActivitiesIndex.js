@@ -2,8 +2,6 @@ import React from 'react'
 import { getSummerActivities } from '../../lib/api'
 import ActivityCard from './ActivityCard'
 
-
-
 function SummerActivitiesIndex() {
   const [activities, setActivities] = React.useState(null)
 
@@ -35,4 +33,4 @@ function SummerActivitiesIndex() {
 
 }
 
-export default SummerActivitiesIndex()
+export default SummerActivitiesIndex
