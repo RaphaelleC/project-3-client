@@ -1,0 +1,10 @@
+@baseUrl = https://localhost:4000/api
+
+# RETURN ALL ACTIVITIES
+GET {{baseUrl}}/activities
+
+### 
+
+# RETURN SINGLE ACTIVITY 
+@ActivityId = 
+GET {{baseUrl}}/activities/{{ActivityId}}
