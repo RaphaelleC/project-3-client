@@ -1,21 +1,19 @@
-import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+import Home from './components/common/Home'
+import Navbar from './components/common/Navbar'
+
 
 function App() {
-  const [activities, setActivities] = React.useState([])
-
-  React.useEffect(() => {
-    const getData = async () => {
-      const res = await fetch('/api/activities')
-      const json = await res.json()
-      setActivities(json)
-    }
-    getData()
-  })
-
   return (
-    <>
-      {activities.map(activity => <h1 key={activity._id}>{activity.name}</h1>)}
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        {/* <Route path="/cheeses/:id" component={CheeseShow} />
+        <Route path="/cheeses" component={CheeseIndex} /> */}
+      </Switch>
+    </BrowserRouter>
   )
 }
 
