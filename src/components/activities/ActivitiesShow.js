@@ -46,7 +46,7 @@ function ActivityShow() {
               </div>
               <div className="column is-half">
                 <figure className="image">
-                  <img src={activity.image_url} alt={activity.name} />
+                  <img src={activity.imageUrl} alt={activity.name} />
                 </figure>
               </div>
             </div>
