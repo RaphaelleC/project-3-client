@@ -22,12 +22,12 @@ function SummerActivitiesIndex() {
       activity.season.includes('Summer')
     )
   })
-  
 
   return (
-    <section>
-      <div>
-        <div>
+
+    <section className="section summer-background-image">
+      <div className="container">
+        <div className="columns is-multiline">
           {summerFilteredActivities ? (
             summerFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
           ) : (
@@ -36,6 +36,8 @@ function SummerActivitiesIndex() {
         </div>
       </div>
     </section>
+
+
   )
 }
 
