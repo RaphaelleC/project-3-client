@@ -1,3 +1,18 @@
+.summerActivities {
+  width: 50%;
+  border: 1px solid black;
+}
 
+.winterActivities {
+  width: 50%;
+  border: 1px solid black;
+  padding: 100px;
+}
+
+.logo {
+ background-image: url('https://i.imgur.com/fmzzbn3.jpg');
+ background-size: cover;
+ border: 1px solid black;
+}
 
 @import '~bulma/bulma.sass';

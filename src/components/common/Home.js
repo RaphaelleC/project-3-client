@@ -1,21 +1,15 @@
 function Home() {
   return (
-    <section className="hero is-fullheight-with-navbar is-warning">
-      <div className="hero-body">
-        <div className ="container">
-          <p className="title is-2 has-text-centered has-text-black">
-            Summer Activities
-          </p>
+    <section className="hero is-info">
+      <div className="columns is-multiline is-mobile">
+        <div className="column is-half summerActivities">
+          <p className="bd-notification is-info">Summer Activities</p>
         </div>
-        <div className ="container">
-          <p className="title is-2 has-text-centered has-text-black">
-            Winter Activities
-          </p>
+        <div className="column is-half winterActivities">
+          <p className="bd-notification is-info">Winter Activities</p>
         </div>
-        <div className ="container">
-          <p className="title is-1 has-text-centered has-text-black">
-            MontVenture
-          </p>
+        <div className="column is-auto logo">
+          <p className="bd-notification is-info ">MontVenture</p>
         </div>
       </div>
     </section>
