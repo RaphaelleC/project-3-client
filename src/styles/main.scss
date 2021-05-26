@@ -1,3 +1,8 @@
-
+.summer-background-image {
+  background-image: url('https://i.imgur.com/n3Tgtl1.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100%;
+}
 
 @import '~bulma/bulma.sass';

@@ -20,7 +20,7 @@ function WinterActivityIndex() {
 
   const winterFilteredActivities = activities?.filter((activity) => {
     return (
-      activity.season.includes('Summer')
+      activity.season.includes('Winter')
     )
   })
 
