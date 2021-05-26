@@ -34,7 +34,7 @@ function ActivityShow() {
                 <h4 className="title is-4">
                   Name
                 </h4>
-                <p>{activity.name}</p>
+                <p>{activity.activityName}</p>
                 <h4 className="title is-4">
                   Season
                 </h4>
@@ -46,7 +46,7 @@ function ActivityShow() {
               </div>
               <div className="column is-half">
                 <figure className="image">
-                  <img src={activity.imageUrl} alt={activity.name} />
+                  <img src={activity.imageUrl} alt={activity.activityName} />
                 </figure>
               </div>
             </div>
