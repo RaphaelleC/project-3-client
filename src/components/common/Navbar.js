@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { isAuthenticated, removeToken } from '../lib/auth'
 
 function Navbar() {
+  useLocation()
   const history = useHistory()
   const isLoggedIn = isAuthenticated()
 

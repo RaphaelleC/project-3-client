@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/activities/create" component={ActivityNew} />
+        <Route path="/create" component={ActivityNew} />
         <Route path="/activities/:activityId" component={ActivityShow} />
         <Route path="/summerActivities" component={summerActivitiesIndex} />
         <Route path="/winterActivities" component={winterActivitiesIndex} />
