@@ -1,11 +1,12 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import { getSingleActivity } from '../lib/api'
+import { Link, useParams } from 'react-router-dom'
+import { deleteActivity, getSingleActivity } from '../lib/api'
+import { isCreator } from '../lib/auth'
 import Error from '../common/Error'
 
 function ActivityShow() {
+  const { activityId } = useParams()
   const [activity, setActivity] = React.useState(null)
-  const { id } = useParams()
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
@@ -13,14 +14,19 @@ function ActivityShow() {
     const getData = async () => {
 
       try {
-        const { data } = await getSingleActivity(id)
+        const { data } = await getSingleActivity(activityId)
         setActivity(data)
       } catch (e) {
         setIsError(true)
       }
     }
     getData()
-  }, [id])
+  }, [activityId])
+
+  const handleDelete = async () => {
+    await deleteActivity(activityId)
+    history.push('/')
+  }
 
   return (
     <section className="section">
@@ -31,31 +37,43 @@ function ActivityShow() {
           <div>
             <h2 className="title has-text-centered">{activity.activityName}</h2>
             <hr />
+            <figure className="image">
+              <img src={activity.imageUrl} alt={activity.activityName} />
+            </figure>
+            <hr />
             <div className="columns">
               <div className="column">
-                <figure className="image">
-                  <img src={activity.imageUrl} alt={activity.activityName} />
-                </figure>
-                <div className="colums">
-                  <div className="colum is-half">
-                    <h4 className="title is-4">
-                      Country
-                    </h4>
-                    <p>{activity.country}</p>
-                    <h4 className="title is-4">
-                      Name
-                    </h4>
-                    <p>{activity.categories}</p>
-                    <h4 className="title is-4">
-                      Categories
-                    </h4>
-                    <p>{activity.categories}</p>
-                    <h4 className="title is-4">
-                      Description
-                    </h4>
-                    <p>{activity.description}</p>
-                  </div>
+                <div className="content is-medium">
+                  <h4 className="title is-4">
+                    Country
+                  </h4>
+                  <p>{activity.country}</p>
+                  <br />
+                  <h4 className="title is-4">
+                    Categories
+                  </h4>
+                  <ul>{activity.categories.map(category => <li key={category._id}>{category}</li>)}</ul>
+                  <br />
+                  <h4 className="title is-4">
+                    Description
+                  </h4>
+                  <p>{activity.description}</p>
+                  <h4 className="title is-4">Creator</h4>
+                  <p>{activity.user.username}</p>
                 </div>
+                {isCreator(activity.user._id) && (
+                  <div className="buttons">
+                    <Link to={`/activities/${activity._id}/edit`} className="button has-text-white has-background-success-dark">
+                      Edit my activity
+                    </Link>
+                    <button onClick={handleDelete} className="button is-danger">
+                      Delete my activity
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="column">
+                <p>FUTURE MAPBOX ZONE</p>
               </div>
             </div>
           </div>

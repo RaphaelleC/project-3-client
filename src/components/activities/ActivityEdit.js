@@ -21,7 +21,7 @@ function ActivityEdit() {
         const res = await getSingleActivity(activityId)
         setFormdata(res.data)
       } catch (e) {
-        setFormErrors(e.response.data.errors)
+        setFormErrors(e.response.data)
       }
     }
     getData()
@@ -31,8 +31,8 @@ function ActivityEdit() {
     e.preventDefault()
 
     try {
-      const { data } = await editActivity(activityId, formdata)
-      history.push(`/activities/${data._id}`)
+      await editActivity(activityId, formdata)
+      history.push(`/activities/${activityId}`)
     } catch (e) {
       setFormErrors(e.response.data.errors)
     }
