@@ -5,7 +5,7 @@ import Error from '../common/Error'
 
 function ActivityShow() {
   const [activity, setActivity] = React.useState(null)
-  const { id } = useParams()
+  const { activityId } = useParams()
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
@@ -13,14 +13,14 @@ function ActivityShow() {
     const getData = async () => {
 
       try {
-        const { data } = await getSingleActivity(id)
+        const { data } = await getSingleActivity(activityId)
         setActivity(data)
       } catch (e) {
         setIsError(true)
       }
     }
     getData()
-  }, [id])
+  }, [activityId])
 
   return (
     <section className="section">
