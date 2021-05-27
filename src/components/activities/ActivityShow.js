@@ -1,7 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+<<<<<<< HEAD:src/components/activities/ActivitiesShow.js
 import getSingleActivity from '../../lib/api'
 import Error from '../common/Error'
+=======
+import { getSingleActivity } from '../lib/api'
+>>>>>>> development:src/components/activities/ActivityShow.js
 
 function ActivityShow() {
   const [activity, setActivity] = React.useState(null)

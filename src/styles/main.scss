@@ -1,3 +1,16 @@
+// html {
+//   background-color: #333;
+// }
+
+// // * fixing margin on radios and checkboxes, being broken by react render on the whitespace
+// input {
+//   &[type='checkbox'],
+//   &[type='radio'] {
+//     margin-left: 0.5em;
+//     margin-right: 0.5em;
+//   }
+// }
+
 .summerActivities {
   width: 50%;
   border: 1px solid black;
