@@ -1,9 +1,12 @@
 import React from 'react'
 import { getAllActivities } from '../../lib/api'
 import ActivityCard from './ActivityCard'
+import Error from '../../common/Error'
 
 function SummerActivitiesIndex() {
   const [activities, setActivities] = React.useState(null)
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !activities & !isError
 
   React.useEffect(() => {
     const getData = async () => {
@@ -11,7 +14,7 @@ function SummerActivitiesIndex() {
         const { data } = await getAllActivities()
         setActivities(data)
       } catch (e) {
-        console.log(e)
+        setIsError(true)
       }
     }
     getData()
@@ -25,16 +28,21 @@ function SummerActivitiesIndex() {
 
   return (
 
-    <section className="section summer-background-image">
-      <div className="container">
-        <div className="columns is-multiline">
-          {summerFilteredActivities ? (
-            summerFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
-          ) : (
-            <p>...loading</p>
-          )}
-        </div>
+    <section className="hero is-fullheight-with-navbar">
+      <div className="summer-background-image hero-body">
+        <section className="section">
+          <div className="container">
+            <div className="columns is-multiline">
+              {isError && <Error />}
+              {isLoading && <p>...loading</p>}
+              {summerFilteredActivities && (
+                summerFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
+              )}
+            </div>
+          </div>
+        </section>
       </div>
+
     </section>
 
 

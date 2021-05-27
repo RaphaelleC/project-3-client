@@ -8,6 +8,7 @@ import winterActivitiesIndex from './components/activities/winterActivities/Acti
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import ActivityNew from './components/activities/ActivityNew'
+import ActivityEdit from './components/activities/ActivitiesEdit'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/create" component={ActivityNew} />
+        <Route path="/edit" component={ActivityEdit} />
         <Route path="/activities/:activityId" component={ActivityShow} />
         <Route path="/summerActivities" component={summerActivitiesIndex} />
         <Route path="/winterActivities" component={winterActivitiesIndex} />

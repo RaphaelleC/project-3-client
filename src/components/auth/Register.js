@@ -1,10 +1,11 @@
-import { useHistory } from 'react-router-dom'
-import { useForm } from '../hooks/useForm'
+import React from 'react'
+import useForm from '../hooks/useForm'
 import { registerUser } from '../lib/api'
+import { useHistory } from 'react-router-dom'
 
 function Register() {
   const history = useHistory()
-  const { formdata, handleChange } = useForm({
+  const { formdata, formErrors, handleChange, setFormErrors } = useForm({
     username: '',
     email: '',
     location: '',
@@ -13,6 +14,8 @@ function Register() {
     passwordConfirmation: '',
   })
 
+  // console.log('forms errors', formErrors)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -20,7 +23,8 @@ function Register() {
       await registerUser(formdata)
       history.push('/login')
     } catch (err) {
-      console.log(err.response.data)
+      setFormErrors(err.response.data.errors)
+      console.log(err.response.data.errors)
     }
   }
 
@@ -33,18 +37,19 @@ function Register() {
             onSubmit={handleSubmit}
           >
             <div className="field">
-              <label className="label" htmlFor="username">
-                Username
-              </label>
+              <label className="label">Username</label>
               <div className="control">
                 <input 
-                  className="input"
+                  className={`input ${formErrors.username ? 'is-danger' : ''}`}
                   name="username"
                   id="username"
                   placeholder="Username"
                   onChange={handleChange}
                 />
               </div>
+              {formErrors.username && ( 
+                <p className="help is-danger">{formErrors.username}</p>
+              )}
             </div>
             <div className="field">
               <label className="label" htmlFor="email">
@@ -59,6 +64,7 @@ function Register() {
                   onChange={handleChange}
                 />
               </div>
+              {formErrors.email && <p className="help is-danger">Email is required!</p>}
             </div>
             <div className="field">
               <label className="label" htmlFor="location">
@@ -102,6 +108,7 @@ function Register() {
                   onChange={handleChange}
                 />
               </div>
+              {formErrors.password && <p className="help is-danger">Password is required!</p>}
             </div>
             <div className="field">
               <label className="label" htmlFor="passwordConfirmation">
@@ -117,6 +124,7 @@ function Register() {
                   onChange={handleChange}
                 />
               </div>
+              {formErrors.passwordConfirmation && <p className="help is-danger">Does not match password!</p>}
             </div>
             <div className="field">
               <button type="submit" className="button is-fullwidth has-text-white has-background-success-dark">

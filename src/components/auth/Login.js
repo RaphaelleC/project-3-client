@@ -1,12 +1,12 @@
 import React from 'react'
+import useForm from '../hooks/useForm'
 import { useHistory } from 'react-router'
 import { loginUser } from '../lib/api'
 import { setToken } from '../lib/auth'
-import { useForm } from '../hooks/useForm'
 
 function Login() {
   const history = useHistory()
-
+  const [isError, setIsError] = React.useState(false)
   const { formdata, handleChange } = useForm({
     email: '',
     password: '',
@@ -20,8 +20,11 @@ function Login() {
       setToken(res.data.token)
       history.push('/')
     } catch (err) {
-      console.log(err.response.data)
+      setIsError(true)
     }
+  }
+  const handleFocus = () => {
+    setIsError(false)
   }
 
   return (
@@ -40,6 +43,7 @@ function Login() {
                   placeholder="email"
                   name="email"
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </div>
             </div>
@@ -52,8 +56,10 @@ function Login() {
                   placeholder="Password"
                   name="password"
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </div>
+              {isError && <p className="help is-danger">Incorrect details. Please try again!</p>}
             </div>
             <div className="field">
               <button 

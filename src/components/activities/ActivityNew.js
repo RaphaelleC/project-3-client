@@ -1,6 +1,6 @@
 import React from 'react'
+import useForm from '../hooks/useForm'
 import { useHistory } from 'react-router-dom'
-import { useForm } from '../hooks/useForm'
 import { createActivity } from '../lib/api'
 
 function ActivityNew() {
