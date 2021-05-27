@@ -1,8 +1,37 @@
-.summer-background-image {
+// html {
+//   background-color: #333;
+// }
+
+// // * fixing margin on radios and checkboxes, being broken by react render on the whitespace
+// input {
+//   &[type='checkbox'],
+//   &[type='radio'] {
+//     margin-left: 0.5em;
+//     margin-right: 0.5em;
+//   }
+// }
+
+.summerActivities {
+  width: 50%;
+  border: 1px solid black;
+}
+
+.winterActivities {
+  width: 50%;
+  border: 1px solid black;
+  padding: 100px;
+}
+
+.logo {
+ background-image: url('https://i.imgur.com/fmzzbn3.jpg');
+ background-size: cover;
+ border: 1px solid black;
+}
+
+ .summer-background-image {
   background-image: url('https://i.imgur.com/n3Tgtl1.jpg');
   background-size: cover;
-  background-attachment: fixed;
-  min-height: 100%;
+  
 }
 
 @import '~bulma/bulma.sass';

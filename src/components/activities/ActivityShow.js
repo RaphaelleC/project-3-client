@@ -1,18 +1,26 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+<<<<<<< HEAD:src/components/activities/ActivitiesShow.js
 import getSingleActivity from '../../lib/api'
+import Error from '../common/Error'
+=======
+import { getSingleActivity } from '../lib/api'
+>>>>>>> development:src/components/activities/ActivityShow.js
 
 function ActivityShow() {
   const [activity, setActivity] = React.useState(null)
   const { id } = useParams()
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !activity && !isError
 
   React.useEffect(() => {
     const getData = async () => {
+
       try {
         const { data } = await getSingleActivity(id)
         setActivity(data)
       } catch (e) {
-        console.log(e)
+        setIsError(true)
       }
     }
     getData()
@@ -21,7 +29,9 @@ function ActivityShow() {
   return (
     <section className="section">
       <div className="container">
-        {activity ? (
+        {isError && <Error/>}
+        {isLoading && <p>...loading</p>}
+        {activity && (
           <div>
             <h2 className="title has-text-centered">{activity.activityName}</h2>
             <hr />
@@ -51,9 +61,7 @@ function ActivityShow() {
               </div>
             </div>
           </div>
-        ) : (
-          <p>...loading</p>
-        )}
+        ) }
       </div>
     </section>
   )
