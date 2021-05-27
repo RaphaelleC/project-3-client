@@ -12,8 +12,9 @@ export function getSingleActivity(id) {
 }
 
 export function createActivity(formdata) {
-  return axios.post(`${baseUrl}/activities`, formdata, { headers: { Authorization: `Bearer ${getToken()}` },
-  })
+  return axios.post(`${baseUrl}/activities`, formdata, 
+    { headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export function registerUser(formdata) {

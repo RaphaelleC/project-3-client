@@ -1,10 +1,51 @@
-@baseUrl = https://localhost:4000/api
+@baseUrl = /api
 
-# RETURN ALL ACTIVITIES
+# GET ALL ACTIVITIES
 GET {{baseUrl}}/activities
 
 ### 
 
-# RETURN SINGLE ACTIVITY 
-@ActivityId = 
-GET {{baseUrl}}/activities/{{ActivityId}}
+# GET A SINGLE ACTIVITY 
+@activityId = 
+GET {{baseUrl}}/activities/{{activityId}}
+
+### 
+
+# REGISTER A NEW USER 
+POST {{baseUrl}}/register
+Content-Type: : application/json
+
+{
+  "username": "Nick" ,
+  "password": "nickpass",
+  "passwordConfirmation": "nickpass",
+  "email": "nick@email"
+}
+
+###
+
+# LOGIN 
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "password": "theopass",
+  "email": "theo@email"
+}
+
+### 
+
+# CREATE A NEW ACTIVITY
+@token = 
+POST {{baseUrl}}/activities 
+Content-Type: application/json 
+Authorization: Bearer {{token}}
+
+{
+  "country": "fake country",
+  "activityName": "fake activity",
+  "description": "a test place",
+  "season": "fake season",
+  "categories": ["Hiking", "Walking"],
+  "imageUrl": "fake url",
+}

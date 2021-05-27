@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import getSingleActivity from '../../lib/api'
+import { getSingleActivity } from '../lib/api'
 
 function ActivityShow() {
   const [activity, setActivity] = React.useState(null)
