@@ -7,10 +7,22 @@ export default function useForm(initialState) {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
     setFormErrors({ ...formErrors, [e.target.name]: '' })
   }
+
+  const handleMultiSelect = selectedItems => { 
+    const values = selectedItems ? selectedItems.map(item => item.value) : []
+    setFormdata({ ...formdata, categories: values })
+  }
+
+  const handleImageUpload = file => {
+    setFormdata({ ...formdata, imageUrl: file })
+  }
+
   return {
     formdata,
     formErrors,
     handleChange,
+    handleMultiSelect,
+    handleImageUpload,
     setFormdata,
     setFormErrors,
   }
