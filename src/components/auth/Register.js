@@ -22,7 +22,8 @@ function Register() {
       await registerUser(formdata)
       history.push('/login')
     } catch (err) {
-      setFormErrors(err.response.data)
+      setFormErrors(err.response.data.errors)
+      console.log(err.response.data.errors)
     }
   }
 
@@ -45,6 +46,7 @@ function Register() {
                   id="username"
                   placeholder="Username"
                   onChange={handleChange}
+                  
                 />
               </div>
               {formErrors.username && <p className="help is-danger">Username is required!</p>}
