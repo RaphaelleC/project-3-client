@@ -1,5 +1,6 @@
 import React from 'react'
-export function useForm(initialState) {
+
+export default function useForm(initialState) {
   const [formdata, setFormdata] = React.useState(initialState)
   const [formErrors, setFormErrors] = React.useState(initialState)
   const handleChange = e => {

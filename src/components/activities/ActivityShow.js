@@ -1,11 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-<<<<<<< HEAD:src/components/activities/ActivitiesShow.js
-import getSingleActivity from '../../lib/api'
-import Error from '../common/Error'
-=======
 import { getSingleActivity } from '../lib/api'
->>>>>>> development:src/components/activities/ActivityShow.js
+import Error from '../common/Error'
 
 function ActivityShow() {
   const [activity, setActivity] = React.useState(null)
@@ -36,32 +32,34 @@ function ActivityShow() {
             <h2 className="title has-text-centered">{activity.activityName}</h2>
             <hr />
             <div className="columns">
-              <div className="column is-half">
-                <h4 className="title is-4">
-                  Country
-                </h4>
-                <p>{activity.country}</p>
-                <h4 className="title is-4">
-                  Name
-                </h4>
-                <p>{activity.activityName}</p>
-                <h4 className="title is-4">
-                  Season
-                </h4>
-                <p>{activity.season}</p>
-                <h4 className="title is-4">
-                  Description
-                </h4>
-                <p>{activity.description}</p>
-              </div>
-              <div className="column is-half">
+              <div className="column">
                 <figure className="image">
                   <img src={activity.imageUrl} alt={activity.activityName} />
                 </figure>
+                <div className="colums">
+                  <div className="colum is-half">
+                    <h4 className="title is-4">
+                      Country
+                    </h4>
+                    <p>{activity.country}</p>
+                    <h4 className="title is-4">
+                      Name
+                    </h4>
+                    <p>{activity.categories}</p>
+                    <h4 className="title is-4">
+                      Categories
+                    </h4>
+                    <p>{activity.categories}</p>
+                    <h4 className="title is-4">
+                      Description
+                    </h4>
+                    <p>{activity.description}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        ) }
+        )}
       </div>
     </section>
   )

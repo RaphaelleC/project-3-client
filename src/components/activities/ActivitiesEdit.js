@@ -8,9 +8,10 @@ function ActivityEdit() {
   const { activityId } = useParams()
   const { formdata, formErrors, handleChange, setFormErrors, setFormdata } = useForm({
     country: '',
-    name: '',
-    season: '',
+    activityName: '',
     description: '',
+    season: '',
+    categories: [],
     imageUrl: '',
   })
 
