@@ -1,12 +1,30 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import Select from 'react-select'
 import useForm from '../hooks/useForm'
+import { useParams, useHistory } from 'react-router-dom'
 import { getSingleActivity, editActivity } from '../lib/api'
+import ImageUpload from '../hooks/imageUpload'
+
+const categoryOptions = [
+  { value: 'backpacking', label: 'Backpacking' },
+  { value: 'bikeTours', label: 'Bike Tours' },
+  { value: 'camping', label: 'Camping' },
+  { value: 'hiking ', label: 'Hiking' },
+  { value: 'mountainBiking', label: 'Mountain Biking' },
+  { value: 'natureTrips', label: 'Nature Trips' },
+  { value: 'roadBiking', label: 'Road Biking' },
+  { value: 'rockClimbing', label: 'Rock Climbing' },
+  { value: 'skiing', label: 'Skiing' },
+  { value: 'snowboarding', label: 'Snowboarding' },
+  { value: 'snowshoeing', label: 'Snowshoeing' },
+  { value: 'trailRunning', label: 'Trail Running' },
+  { value: 'walking', label: 'Walking' }
+]
 
 function ActivityEdit() {
   const history = useHistory()
   const { activityId } = useParams()
-  const { formdata, formErrors, handleChange, setFormErrors, setFormdata } = useForm({
+  const { formdata, formErrors, handleChange, handleMultiSelect, handleImageUpload, setFormErrors, setFormdata } = useForm({
     country: '',
     activityName: '',
     description: '',
@@ -42,16 +60,14 @@ function ActivityEdit() {
     <section className="section">
       <div className="container">
         <div className="columns">
-          <form 
-            className="column is-half is-offset-one-quarter box"
+          <form className="column is-half is-offset-one-quarter"
             onSubmit={handleSubmit}
           >
             <div className="field">
-              <label className="label">Country</label>
+              <label className="label" htmlFor="country">Country</label>
               <div className="control">
-                <input
-                  className={`input ${formErrors.country ? 'is-danger' : ''}`}
-                  placeholder="Country"
+                <input 
+                  className="input"
                   name="country"
                   onChange={handleChange}
                   value={formdata.country}
@@ -62,44 +78,27 @@ function ActivityEdit() {
               )}
             </div>
             <div className="field">
-              <label className="label">Name</label>
+              <label className="label" htmlFor="activityName">Activity Name</label>
               <div className="control">
-                <input
-                  className={`input ${formErrors.name ? 'is-danger' : ''}`}
-                  placeholder="Name"
-                  name="name"
+                <input 
+                  className="input"
+                  name="activityName"
                   onChange={handleChange}
-                  value={formdata.name}
+                  value={formdata.activityName}
                 />
               </div>
-              {formErrors.name && (
-                <p className="help is-danger">{formErrors.name}</p>
+              {formErrors.activityName && (
+                <p className="help is-danger">{formErrors.activityName}</p>
               )}
             </div>
             <div className="field">
-              <label className="label">Season</label>
+              <label className="label" htmlFor="description">Description</label>
               <div className="control">
-                <input
-                  className={`input ${formErrors.season ? 'is-danger' : ''}`}
-                  placeholder="Season"
-                  name="season"
-                  onChange={handleChange}
-                  value={formdata.season}
-                />
-              </div>
-              {formErrors.season && (
-                <p className="help is-danger">{formErrors.season}</p>
-              )}
-            </div>
-            <div className="field">
-              <label className="label">Description</label>
-              <div className="control">
-                <input
-                  className={`input ${formErrors.description ? 'is-danger' : ''}`}
-                  placeholder="Description"
+                <input 
+                  className="textarea"
                   name="description"
-                  onChange={handleChange}
                   value={formdata.description}
+                  onChange={handleChange}
                 />
               </div>
               {formErrors.description && (
@@ -107,23 +106,55 @@ function ActivityEdit() {
               )}
             </div>
             <div className="field">
-              <label className="label">Image</label>
+              <label className="label">Season:</label>
               <div className="control">
-                <input
-                  className={`input ${formErrors.imageUrl ? 'is-danger' : ''}`}
-                  placeholder="Image URL"
-                  name="imageUrl"
-                  onChange={handleChange}
-                  value={formdata.imageUrl}
-                />
+                <label className="radio">
+                  <input 
+                    type="radio"
+                    name="season"
+                    value="summer"
+                    onChange={handleChange}
+                    checked={formdata.season === 'summer'}
+                  />
+                Summer
+                </label>
+                <label className="radio">
+                  <input 
+                    type="radio"
+                    name="season"
+                    value="winter"
+                    onChange={handleChange}
+                    checked={formdata.season === 'winter'}
+                  />
+                Winter
+                </label>
               </div>
-              {formErrors.imageUrl && (
-                <p className="help is-danger">{formErrors.imageUrl}</p>
+              {formErrors.season && (
+                <p className="help is-danger">{formErrors.season}</p>
               )}
             </div>
             <div className="field">
-              <button type="submit" className="button has-text-white has-background-success-dark">
-                Edit my activity !
+              <label className="label">Please select categories</label>
+              <div className="control">
+                <Select
+                  options={categoryOptions}
+                  isMulti
+                  onChange={handleMultiSelect}
+                />
+              </div>
+              {formErrors.categories && (
+                <p className="help is-danger">{formErrors.categories}</p>
+              )}
+            </div>
+            <div className="field">
+              <ImageUpload onUpload={handleImageUpload} />
+            </div>
+            {formErrors.imageUrl && (
+              <p className="help is-danger">{formErrors.imageUrl}</p>
+            )}
+            <div className="field">
+              <button className="button is-fullwidth is-dark" type="submit">
+            Submit
               </button>
             </div>
           </form>
