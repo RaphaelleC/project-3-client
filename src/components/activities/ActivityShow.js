@@ -106,7 +106,6 @@ function ActivityShow() {
               </div>
             </div>
           </div>
-
         )}
       </div>
     </section>
