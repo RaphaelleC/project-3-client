@@ -32,7 +32,7 @@ function SummerActivitiesIndex() {
       <div className="summer-background-image hero-body">
         <section className="section">
           <div className="container">
-            <div className="columns is-multiline">
+            <div className="columns">
               {isError && <Error />}
               {isLoading && <p>...loading</p>}
               {summerFilteredActivities && (

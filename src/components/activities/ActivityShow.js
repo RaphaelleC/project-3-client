@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom'
 import { getSingleActivity } from '../lib/api'
 import Error from '../common/Error'
 
+
 function ActivityShow() {
   const [activity, setActivity] = React.useState(null)
-  const { id } = useParams()
+  const { activityId } = useParams()
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
@@ -13,19 +14,20 @@ function ActivityShow() {
     const getData = async () => {
 
       try {
-        const { data } = await getSingleActivity(id)
+        const { data } = await getSingleActivity(activityId)
         setActivity(data)
       } catch (e) {
         setIsError(true)
       }
     }
     getData()
-  }, [id])
+  }, [activityId])
+
 
   return (
     <section className="section">
       <div className="container">
-        {isError && <Error/>}
+        {isError && <Error />}
         {isLoading && <p>...loading</p>}
         {activity && (
           <div>
@@ -54,10 +56,25 @@ function ActivityShow() {
                 <figure className="image">
                   <img src={activity.imageUrl} alt={activity.activityName} />
                 </figure>
+                <h4 className="title is-4">Comments</h4>
+                {
+                  activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
+                }
+                {/*COMMENT SECTION*/}
+                <div>
+                  <textarea
+                    placeholder="Add a comment"
+                    name="comments"
+                  />
+                  <div>
+                    <button type="submit">Add comment</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        ) }
+
+        )}
       </div>
     </section>
   )
