@@ -4,9 +4,11 @@ import { deleteActivity, getSingleActivity } from '../lib/api'
 import { isCreator } from '../lib/auth'
 import Error from '../common/Error'
 
+
 function ActivityShow() {
   const { activityId } = useParams()
   const [activity, setActivity] = React.useState(null)
+
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
@@ -37,7 +39,7 @@ function ActivityShow() {
   return (
     <section className="section">
       <div className="container">
-        {isError && <Error/>}
+        {isError && <Error />}
         {isLoading && <p>...loading</p>}
         {activity && (
           <div>
@@ -80,11 +82,31 @@ function ActivityShow() {
                   ''
                 }
               </div>
-              <div className="column">
-                <p>FUTURE MAPBOX ZONE</p>
+              <div className="column is-half">
+                <figure className="image">
+                  <img src={activity.imageUrl} alt={activity.activityName} />
+                </figure>
+                <h4 className="title is-4">Comments</h4>
+                {
+                  activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
+                }
+                {/*COMMENT SECTION*/}
+                <div>
+                  <textarea
+                    placeholder="Add a comment"
+                    name="comments"
+                  />
+                  <div>
+                    <button type="submit">Add comment</button>
+                  </div>
+                  <div className="column">
+                    <p>FUTURE MAPBOX ZONE</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
         )}
       </div>
     </section>
