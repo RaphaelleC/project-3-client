@@ -6,7 +6,7 @@ GET {{baseUrl}}/activities
 ### 
 
 # GET A SINGLE ACTIVITY 
-@activityId = 
+@activityId = 60ae21bdce591174103cde0d
 GET {{baseUrl}}/activities/{{activityId}}
 
 ### 
@@ -16,10 +16,10 @@ POST {{baseUrl}}/register
 Content-Type: : application/json
 
 {
-  "username": "Nick" ,
-  "password": "nickpass",
-  "passwordConfirmation": "nickpass",
-  "email": "nick@email"
+  "username": "Nick2" ,
+  "password": "nickpass2",
+  "passwordConfirmation": "nickpass2",
+  "email": "nick2@email"
 }
 
 ###
