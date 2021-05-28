@@ -1,6 +1,7 @@
-import { useHistory } from 'react-router-dom'
-import { useForm } from '../hooks/useForm'
+import React from 'react'
+import useForm from '../hooks/useForm'
 import { registerUser } from '../lib/api'
+import { useHistory } from 'react-router-dom'
 
 function Register() {
   const history = useHistory()
@@ -13,7 +14,7 @@ function Register() {
     passwordConfirmation: '',
   })
 
-  console.log('forms errors', formErrors)
+  // console.log('forms errors', formErrors)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -36,20 +37,19 @@ function Register() {
             onSubmit={handleSubmit}
           >
             <div className="field">
-              <label className="label" htmlFor="username">
-                Username
-              </label>
+              <label className="label">Username</label>
               <div className="control">
                 <input 
-                  className="input"
+                  className={`input ${formErrors.username ? 'is-danger' : ''}`}
                   name="username"
                   id="username"
                   placeholder="Username"
                   onChange={handleChange}
-                  
                 />
               </div>
-              {formErrors.username && <p className="help is-danger">Username is required!</p>}
+              {formErrors.username && ( 
+                <p className="help is-danger">{formErrors.username}</p>
+              )}
             </div>
             <div className="field">
               <label className="label" htmlFor="email">

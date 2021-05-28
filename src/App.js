@@ -8,6 +8,8 @@ import winterActivitiesIndex from './components/activities/winterActivities/Acti
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import ActivityNew from './components/activities/ActivityNew'
+import ActivityEdit from './components/activities/ActivityEdit'
+import SecureRoute from './components/common/SecureRoute'
 
 
 function App() {
@@ -16,7 +18,8 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/activities/create" component={ActivityNew} />
+        <SecureRoute path="/create" component={ActivityNew} />
+        <SecureRoute path="/activities/:activityId/edit" component={ActivityEdit} />
         <Route path="/activities/:activityId" component={ActivityShow} />
         <Route path="/summerActivities" component={summerActivitiesIndex} />
         <Route path="/winterActivities" component={winterActivitiesIndex} />

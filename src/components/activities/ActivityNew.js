@@ -1,11 +1,29 @@
 import React from 'react'
+import Select from 'react-select'
+import useForm from '../hooks/useForm'
 import { useHistory } from 'react-router-dom'
-import { useForm } from '../hooks/useForm'
 import { createActivity } from '../lib/api'
+import ImageUpload from '../hooks/imageUpload'
+
+const categoryOptions = [
+  { value: 'backpacking', label: 'Backpacking' },
+  { value: 'bikeTours', label: 'Bike Tours' },
+  { value: 'camping', label: 'Camping' },
+  { value: 'hiking ', label: 'Hiking' },
+  { value: 'mountainBiking', label: 'Mountain Biking' },
+  { value: 'natureTrips', label: 'Nature Trips' },
+  { value: 'roadBiking', label: 'Road Biking' },
+  { value: 'rockClimbing', label: 'Rock Climbing' },
+  { value: 'skiing', label: 'Skiing' },
+  { value: 'snowboarding', label: 'Snowboarding' },
+  { value: 'snowshoeing', label: 'Snowshoeing' },
+  { value: 'trailRunning', label: 'Trail Running' },
+  { value: 'walking', label: 'Walking' }
+]
 
 function ActivityNew() {
   const history = useHistory()
-  const { formdata, handleChange } = useForm({ 
+  const { formdata, handleChange, handleMultiSelect, handleImageUpload, formErrors } = useForm({ 
     country: '',
     activityName: '',
     description: '',
@@ -13,11 +31,7 @@ function ActivityNew() {
     categories: [],
     imageUrl: '',
   })
-
-  // const handleChange = event => {
-  //   const nextFormData = { ...formdata, [event.target.name]: event.target.value }
-  //   setFormData(nextFormData)
-  // }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -51,6 +65,9 @@ function ActivityNew() {
                   value={formdata.country}
                 />
               </div>
+              {formErrors.country && (
+                <p className="help is-danger">{formErrors.country}</p>
+              )}
             </div>
             <div className="field">
               <label className="label" htmlFor="activityName">Activity Name</label>
@@ -62,6 +79,9 @@ function ActivityNew() {
                   value={formdata.activityName}
                 />
               </div>
+              {formErrors.activityName && (
+                <p className="help is-danger">{formErrors.activityName}</p>
+              )}
             </div>
             <div className="field">
               <label className="label" htmlFor="description">Description</label>
@@ -73,6 +93,9 @@ function ActivityNew() {
                   onChange={handleChange}
                 />
               </div>
+              {formErrors.description && (
+                <p className="help is-danger">{formErrors.description}</p>
+              )}
             </div>
             <div className="field">
               <label className="label">Season:</label>
@@ -98,12 +121,29 @@ function ActivityNew() {
                 Winter
                 </label>
               </div>
+              {formErrors.season && (
+                <p className="help is-danger">{formErrors.season}</p>
+              )}
             </div>
             <div className="field">
-              <button type="button" className="button is-fullwidth is-info">
-            Upload Image
-              </button>
+              <label className="label">Please select categories</label>
+              <div className="control">
+                <Select
+                  options={categoryOptions}
+                  isMulti
+                  onChange={handleMultiSelect}
+                />
+              </div>
+              {formErrors.categories && (
+                <p className="help is-danger">{formErrors.categories}</p>
+              )}
             </div>
+            <div className="field">
+              <ImageUpload onUpload={handleImageUpload} />
+            </div>
+            {formErrors.imageUrl && (
+              <p className="help is-danger">{formErrors.imageUrl}</p>
+            )}
             <div className="field">
               <button className="button is-fullwidth is-dark" type="submit">
             Submit
@@ -113,7 +153,6 @@ function ActivityNew() {
         </div>
       </div>
     </section>
-    
   )
 }
 
