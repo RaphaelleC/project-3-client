@@ -13,20 +13,20 @@ export function getAllActivities() {
   return axios.get(`${baseUrl}/activities`)
 }
 
-export function getSingleActivity(id) {
-  return axios.get(`${baseUrl}/activities/${id}`)
+export function getSingleActivity(activityId) {
+  return axios.get(`${baseUrl}/activities/${activityId}`)
 }
 
 export function createActivity(formdata) {
   return axios.post(`${baseUrl}/activities`, formdata, headers())
 }
 
-export function editActivity(id, formdata) {
-  return axios.put(`${baseUrl}/activities/${id}`, formdata, headers())
+export function editActivity(activityId, formdata) {
+  return axios.put(`${baseUrl}/activities/${activityId}`, formdata, headers())
 }
 
-export function deleteActivity(id) {
-  return axios.delete(`${baseUrl}/activities/${id}`, headers())
+export function deleteActivity(activityId) {
+  return axios.delete(`${baseUrl}/activities/${activityId}`, headers())
 }
 
 export function registerUser(formdata) {

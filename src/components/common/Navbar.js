@@ -43,7 +43,7 @@ function Navbar() {
                 </>
                 :
                 <>
-                  <Link to="/create" className="button has text-white has-background-success-dark">
+                  <Link to="/create" className="button has-text-white has-background-success-dark">
                   Create Activity
                   </Link>
                   <button className="button has-text-white has-background-danger-dark" onClick={handleLogout}>Log out</button>

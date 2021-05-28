@@ -25,15 +25,19 @@ function WinterActivityIndex() {
   })
 
   return (
-    <section className="section">
-      <div className="container">
-        <div className="columns is-multiline">
-          {winterFilteredActivities ? (
-            winterFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
-          ) : (
-            <p>...loading</p>
-          )}
-        </div>
+    <section className="hero is-fullheight-with-navbar">
+      <div className="winter-background-image hero-body">
+        <section className="section">
+          <div className="container">
+            <div className="columns is-multiline">
+              {winterFilteredActivities ? (
+                winterFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
+              ) : (
+                <p>...loading</p>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   )

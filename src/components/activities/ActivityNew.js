@@ -23,7 +23,7 @@ const categoryOptions = [
 
 function ActivityNew() {
   const history = useHistory()
-  const { formdata, handleChange, handleMultiSelect, handleImageUpload } = useForm({ 
+  const { formdata, handleChange, handleMultiSelect, handleImageUpload, formErrors } = useForm({ 
     country: '',
     activityName: '',
     description: '',
@@ -64,6 +64,9 @@ function ActivityNew() {
                   value={formdata.country}
                 />
               </div>
+              {formErrors.country && (
+                <p className="help is-danger">{formErrors.country}</p>
+              )}
             </div>
             <div className="field">
               <label className="label" htmlFor="activityName">Activity Name</label>
@@ -75,6 +78,9 @@ function ActivityNew() {
                   value={formdata.activityName}
                 />
               </div>
+              {formErrors.activityName && (
+                <p className="help is-danger">{formErrors.activityName}</p>
+              )}
             </div>
             <div className="field">
               <label className="label" htmlFor="description">Description</label>
@@ -86,6 +92,9 @@ function ActivityNew() {
                   onChange={handleChange}
                 />
               </div>
+              {formErrors.description && (
+                <p className="help is-danger">{formErrors.description}</p>
+              )}
             </div>
             <div className="field">
               <label className="label">Season:</label>
@@ -111,6 +120,9 @@ function ActivityNew() {
                 Winter
                 </label>
               </div>
+              {formErrors.season && (
+                <p className="help is-danger">{formErrors.season}</p>
+              )}
             </div>
             <div className="field">
               <label className="label">Select Activity Type</label>
@@ -121,10 +133,16 @@ function ActivityNew() {
                   onChange={handleMultiSelect}
                 />
               </div>
+              {formErrors.categories && (
+                <p className="help is-danger">{formErrors.categories}</p>
+              )}
             </div>
             <div className="field">
               <ImageUpload onUpload={handleImageUpload} />
             </div>
+            {formErrors.imageUrl && (
+              <p className="help is-danger">{formErrors.imageUrl}</p>
+            )}
             <div className="field">
               <button className="button is-fullwidth is-dark" type="submit">
             Submit
@@ -134,7 +152,6 @@ function ActivityNew() {
         </div>
       </div>
     </section>
-    
   )
 }
 
