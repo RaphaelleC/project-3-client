@@ -28,6 +28,12 @@ function ActivityShow() {
     history.push('/')
   }
 
+  // console.log(activity.user._id)
+  if (activity) {
+    console.log(isCreator(activity.user._id))
+    console.log(activityId)
+  }
+
   return (
     <section className="section">
       <div className="container">
@@ -61,16 +67,18 @@ function ActivityShow() {
                   <h4 className="title is-4">Creator</h4>
                   <p>{activity.user.username}</p>
                 </div>
-                {isCreator(activity.user._id) && (
+                {isCreator(activity.user._id) ? (
                   <div className="buttons">
-                    <Link to={`/activities/${activity._id}/edit`} className="button has-text-white has-background-success-dark">
+                    <Link to={`/activities/${activityId}/edit`} className="button has-text-white has-background-success-dark">
                       Edit my activity
                     </Link>
                     <button onClick={handleDelete} className="button is-danger">
                       Delete my activity
                     </button>
-                  </div>
-                )}
+                  </div> )
+                  :
+                  ''
+                }
               </div>
               <div className="column">
                 <p>FUTURE MAPBOX ZONE</p>
