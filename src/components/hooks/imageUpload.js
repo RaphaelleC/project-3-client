@@ -38,7 +38,7 @@ function ImageUpload({ onUpload }) {
   return (
     <>
       {image && <img src={image} alt="uploaded image"/>}
-      {!image && <button onClick={handleUpload} className="button is-info is fullwidth" type="button">Upload Image</button>}
+      {!image && <button onClick={handleUpload} className="button is-info is-fullwidth" type="button">Upload Image</button>}
     </>
   )
 }

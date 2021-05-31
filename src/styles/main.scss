@@ -1,3 +1,7 @@
+body {
+  font-family: 'Carter One', cursive;
+}
+
 input {
   &[type='radio'] {
     margin-left: 0.5em;
@@ -5,21 +9,46 @@ input {
   }
 }
 
+.card-header-title {
+ font-family: 'Carter One', cursive;
+ font-weight: normal;
+}
+
+.card-image img.cardimg {
+  width:330px;
+  height: 195px;
+  object-fit: fill;
+}
+
+h2 {
+ font-family: 'Carter One', cursive;
+ color:white;
+ text-align: center;
+ font-size: 80px;
+ font-weight: normal;
+}
+
+$navbar-background-color: #cccccc;
+
+.navbarActivities a {
+margin-right: 20px;
+}
+
 .summerActivities {
   width: 50%;
   border: 1px solid black;
+  padding: 10px;
 }
 
 .winterActivities {
   width: 50%;
   border: 1px solid black;
-  padding: 100px;
+  padding: 10px;
 }
 
 .logo {
  background-image: url('https://i.imgur.com/fmzzbn3.jpg');
  background-size: cover;
- border: 1px solid black;
 }
 
  .summer-background-image {
@@ -32,6 +61,10 @@ input {
   background-image: url('https://i.imgur.com/iYfWXFV.jpg');
   background-size: cover;
   
+}
+
+.map-container {
+  height: 400px;
 }
 
 @import '~bulma/bulma.sass';

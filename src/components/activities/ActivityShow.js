@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { deleteActivity, getSingleActivity } from '../lib/api'
 import { isCreator } from '../lib/auth'
@@ -12,6 +12,8 @@ function ActivityShow() {
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
+  
+  
   React.useEffect(() => {
     const getData = async () => {
 
@@ -24,6 +26,26 @@ function ActivityShow() {
     }
     getData()
   }, [activityId])
+
+ 
+  // React.useEffect(() => {
+  //   if (map.current) return // initialize map only once
+  //   map.current = new mapboxgl.Map({
+  //     container: this.mapContainer.current,
+  //     style: 'mapbox://styles/mapbox/streets-v11',
+  //     center: [lng, lat],
+  //     zoom: zoom,
+  //   })
+  // })
+
+  // React.useEffect(() => {
+  //   if (!map.current) return // wait for map to initialize
+  //   map.current.on('move', () => {
+  //     setLng(map.current.getCenter().lng.toFixed(4))
+  //     setLat(map.current.getCenter().lat.toFixed(4))
+  //     setZoom(map.current.getZoom().toFixed(2))
+  //   })
+  // })
 
   const handleDelete = async () => {
     await deleteActivity(activityId)
@@ -58,15 +80,15 @@ function ActivityShow() {
                   <p>{activity.country}</p>
                   <br />
                   <h4 className="title is-4">
+                    Description
+                  </h4>
+                  <p>{activity.description}</p>
+                  <h4 className="title is-4">
                     Categories
                   </h4>
                   <ul>{activity.categories.map(category => <li key={category._id}>{category}</li>)}</ul>
                   <br />
-                  <h4 className="title is-4">
-                    Description
-                  </h4>
-                  <p>{activity.description}</p>
-                  <h4 className="title is-4">Creator</h4>
+                  <h4 className="title is-4">Created by</h4>
                   <p>{activity.user.username}</p>
                 </div>
                 {isCreator(activity.user._id) ? (
@@ -83,9 +105,7 @@ function ActivityShow() {
                 }
               </div>
               <div className="column is-half">
-                <figure className="image">
-                  <img src={activity.imageUrl} alt={activity.activityName} />
-                </figure>
+                
                 <h4 className="title is-4">Comments</h4>
                 {
                   activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
@@ -109,6 +129,7 @@ function ActivityShow() {
         )}
       </div>
     </section>
+    
   )
 }
 
