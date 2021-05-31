@@ -3,7 +3,12 @@ import { Link, useParams } from 'react-router-dom'
 import { deleteActivity, getSingleActivity } from '../lib/api'
 import { isCreator } from '../lib/auth'
 import Error from '../common/Error'
-
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 function ActivityShow() {
   const { activityId } = useParams()
@@ -52,7 +57,16 @@ function ActivityShow() {
     history.push('/')
   }
 
-  // console.log(activity.user._id)
+  const [open, setOpen] = React.useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   if (activity) {
     console.log(isCreator(activity.user._id))
     console.log(activityId)
@@ -96,9 +110,30 @@ function ActivityShow() {
                     <Link to={`/activities/${activityId}/edit`} className="button has-text-white has-background-success-dark">
                       Edit my activity
                     </Link>
-                    <button onClick={handleDelete} className="button is-danger">
-                      Delete my activity
-                    </button>
+                    <div>
+                      <button onClick={handleClickOpen} className="button is-danger">
+                        Delete my activity
+                      </button>
+                      <Dialog
+                        open={open}
+                        onClose={handleClose}
+                      >
+                        <DialogTitle>{'Delete this activity ?'}</DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            This will permanently delete the activity from the website.
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>
+                            No
+                          </Button>
+                          <Button onClick={handleDelete}>
+                            Yes, delete
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                    </div>
                   </div> )
                   :
                   ''
@@ -110,7 +145,6 @@ function ActivityShow() {
                 {
                   activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
                 }
-                {/*COMMENT SECTION*/}
                 <div>
                   <textarea
                     placeholder="Add a comment"
@@ -120,7 +154,7 @@ function ActivityShow() {
                     <button type="submit">Add comment</button>
                   </div>
                   <div className="column">
-                    <p>FUTURE MAPBOX ZONE</p>
+                    <p>MAP FOR YOUR ACTIVITIES COMING VERY SOON...</p>
                   </div>
                 </div>
               </div>
