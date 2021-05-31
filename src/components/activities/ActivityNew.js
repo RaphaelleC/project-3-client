@@ -43,7 +43,6 @@ function ActivityNew() {
       console.log(err.response.data)
     }
       
-    // window.alert(`Submitting ${JSON.stringify(formdata, null, 2)}`)
   }
 
   console.log('formdata', formdata)
@@ -126,7 +125,7 @@ function ActivityNew() {
               )}
             </div>
             <div className="field">
-              <label className="label">Please select categories</label>
+              <label className="label">Select Activity Type</label>
               <div className="control">
                 <Select
                   options={categoryOptions}

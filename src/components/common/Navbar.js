@@ -12,20 +12,20 @@ function Navbar() {
     history.push('/')
   }
   return (
-    <nav className="navbar is-black">
+    <nav className="navbar is-blue">
       <div className="container">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item">
-            🏔
+            <img src='https://i.imgur.com/0uVCbH7.png'/>
           </Link>
         </div>
         <div className="navbar-item">
-          <div className="buttons">
-            <Link to="/summerActivities" className="button is-warning">
-            Summer Activities
+          <div className="navbarActivities">
+            <Link to="/summerActivities" >
+            ☀️&nbsp;&nbsp;Summer Activities
             </Link>
-            <Link to="/winterActivities" className="button">
-            Winter Activities
+            <Link to="/winterActivities">
+            ❄️&nbsp;&nbsp;Winter Activities
             </Link>
           </div>
         </div>

@@ -1,18 +1,20 @@
 import React from 'react'
 import { getAllActivities } from '../../lib/api'
-
+import Error from '../../common/Error'
 import ActivityCard from './ActivityCard'
 
 function WinterActivityIndex() {
   const [activities, setActivities] = React.useState(null)
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !activities & !isError
 
   React.useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await getAllActivities()
-        setActivities(data)
+        const res = await getAllActivities()
+        setActivities(res.data)
       } catch (e) {
-        console.log(e)
+        setIsError(true)
       }
     }
     getData()
@@ -20,7 +22,7 @@ function WinterActivityIndex() {
 
   const winterFilteredActivities = activities?.filter((activity) => {
     return (
-      activity.season.includes('Winter')
+      activity.season.includes('winter')
     )
   })
 
@@ -30,10 +32,10 @@ function WinterActivityIndex() {
         <section className="section">
           <div className="container">
             <div className="columns is-multiline">
-              {winterFilteredActivities ? (
+              {isError && <Error />}
+              {isLoading && <p>...loading</p>}
+              {winterFilteredActivities && (
                 winterFilteredActivities.map(activity => <ActivityCard key={activity._id} {...activity} />)
-              ) : (
-                <p>...loading</p>
               )}
             </div>
           </div>
