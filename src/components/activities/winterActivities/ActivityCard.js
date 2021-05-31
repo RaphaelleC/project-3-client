@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function ActivityCard({ _id, activityName, country, imageUrl }) {
   return (
-    <div className="column">
+    <div className="column is-5">
       <Link to={`/activities/${_id}`}>
         <div className="card">
           <div className="card-header">
