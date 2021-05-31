@@ -42,10 +42,7 @@ function SummerActivitiesIndex() {
           </div>
         </section>
       </div>
-
     </section>
-
-
   )
 }
 

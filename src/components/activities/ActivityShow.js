@@ -32,7 +32,7 @@ function ActivityShow() {
     getData()
   }, [activityId])
 
- 
+
   // React.useEffect(() => {
   //   if (map.current) return // initialize map only once
   //   map.current = new mapboxgl.Map({
@@ -75,95 +75,99 @@ function ActivityShow() {
   return (
     <section className="section">
       <div className="container">
-        {isError && <Error />}
-        {isLoading && <p>...loading</p>}
-        {activity && (
-          <div>
-            <h2 className="title has-text-centered">{activity.activityName}</h2>
-            <hr />
-            <figure className="image">
-              <img src={activity.imageUrl} alt={activity.activityName} />
-            </figure>
-            <hr />
-            <div className="columns">
-              <div className="column">
-                <div className="content is-medium">
-                  <h4 className="title is-4">
-                    Country
-                  </h4>
-                  <p>{activity.country}</p>
-                  <br />
-                  <h4 className="title is-4">
-                    Description
-                  </h4>
-                  <p>{activity.description}</p>
-                  <h4 className="title is-4">
-                    Categories
-                  </h4>
-                  <ul>{activity.categories.map(category => <li key={category._id}>{category}</li>)}</ul>
-                  <br />
-                  <h4 className="title is-4">Created by</h4>
-                  <p>{activity.user.username}</p>
-                </div>
-                {isCreator(activity.user._id) ? (
-                  <div className="buttons">
-                    <Link to={`/activities/${activityId}/edit`} className="button has-text-white has-background-success-dark">
-                      Edit my activity
-                    </Link>
-                    <div>
-                      <button onClick={handleClickOpen} className="button is-danger">
-                        Delete my activity
-                      </button>
-                      <Dialog
-                        open={open}
-                        onClose={handleClose}
-                      >
-                        <DialogTitle>{'Delete this activity ?'}</DialogTitle>
-                        <DialogContent>
-                          <DialogContentText>
-                            This will permanently delete the activity from the website.
-                          </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleClose}>
-                            No
-                          </Button>
-                          <Button onClick={handleDelete}>
-                            Yes, delete
-                          </Button>
-                        </DialogActions>
-                      </Dialog>
-                    </div>
-                  </div> )
-                  :
-                  ''
-                }
-              </div>
-              <div className="column is-half">
-                
-                <h4 className="title is-4">Comments</h4>
-                {
-                  activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
-                }
-                <div>
-                  <textarea
-                    placeholder="Add a comment"
-                    name="comments"
-                  />
-                  <div>
-                    <button type="submit">Add comment</button>
-                  </div>
+        <div className="columns">
+          <div className="column is-8 is-offset-2">
+            {isError && <Error />}
+            {isLoading && <p>...loading</p>}
+            {activity && (
+              <div>
+                <h2 className="title has-text-centered">{activity.activityName}</h2>
+                <hr />
+                <figure className="image">
+                  <img src={activity.imageUrl} alt={activity.activityName} />
+                </figure>
+                <hr />
+                <div className="columns">
                   <div className="column">
-                    <p>MAP FOR YOUR ACTIVITIES COMING VERY SOON...</p>
+                    <div className="content is-medium">
+                      <h4 className="title is-4 has-background-white-ter">
+                        Country
+                      </h4>
+                      <p>{activity.country}</p>
+                      <br />
+                      <h4 className="title is-4 has-background-white-ter">
+                        Description
+                      </h4>
+                      <p className="text-justified">{activity.description}</p>
+                      <h4 className="title is-4 has-background-white-ter">
+                        Categories
+                      </h4>
+                      <div>{activity.categories.map(category => <span key={category._id} className="tag is-primary is-light is-medium">{category}</span>)}</div>
+                      <br />
+                      <h4 className="title is-4 has-background-white-ter">Created by</h4>
+                      <p>{activity.user.username}</p>
+                    </div>
+                    {isCreator(activity.user._id) ? (
+                      <div className="buttons">
+                        <Link to={`/activities/${activityId}/edit`} className="button has-text-white has-background-success-dark">
+                          Edit my activity
+                        </Link>
+                        <div>
+                          <button onClick={handleClickOpen} className="button is-danger">
+                            Delete my activity
+                          </button>
+                          <Dialog
+                            open={open}
+                            onClose={handleClose}
+                          >
+                            <DialogTitle>{'Delete this activity ?'}</DialogTitle>
+                            <DialogContent>
+                              <DialogContentText>
+                                This will permanently delete the activity from the website.
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button onClick={handleClose}>
+                                No
+                              </Button>
+                              <Button onClick={handleDelete}>
+                                Yes, delete
+                              </Button>
+                            </DialogActions>
+                          </Dialog>
+                        </div>
+                      </div> )
+                      :
+                      ''
+                    }
+                  </div>
+                  <div className="column is-half">
+                    
+                    <h4 className="title is-4 has-background-white-ter">Comments</h4>
+                    {
+                      activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
+                    }
+                    <div>
+                      <textarea
+                        placeholder="Add a comment"
+                        name="comments"
+                      />
+                      <div>
+                        <button type="submit">Add comment</button>
+                      </div>
+                      <div className="column">
+                        <p>MAP FOR YOUR ACTIVITIES COMING VERY SOON !</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
+        </div>
+        
       </div>
     </section>
-    
   )
 }
 
