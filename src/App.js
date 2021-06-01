@@ -11,7 +11,6 @@ import ActivityNew from './components/activities/ActivityNew'
 import ActivityEdit from './components/activities/ActivityEdit'
 import SecureRoute from './components/common/SecureRoute'
 
-
 function App() {
   return (
     <Router>

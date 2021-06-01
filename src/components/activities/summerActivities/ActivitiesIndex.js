@@ -22,7 +22,7 @@ function SummerActivitiesIndex() {
 
   const summerFilteredActivities = activities?.filter((activity) => {
     return (
-      activity.season.includes('Summer')
+      activity.season.includes('summer')
     )
   })
 
@@ -32,7 +32,7 @@ function SummerActivitiesIndex() {
       <div className="summer-background-image hero-body">
         <section className="section">
           <div className="container">
-            <div className="columns">
+            <div className="columns is-multiline">
               {isError && <Error />}
               {isLoading && <p>...loading</p>}
               {summerFilteredActivities && (
@@ -42,10 +42,7 @@ function SummerActivitiesIndex() {
           </div>
         </section>
       </div>
-
     </section>
-
-
   )
 }
 

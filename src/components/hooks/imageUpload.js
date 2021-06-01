@@ -37,8 +37,8 @@ function ImageUpload({ onUpload }) {
   // ? On upload, it uploads to Cloudianry and returns URL to our app to use
   return (
     <>
-      {image && <img src={image} alt="uploaded profile"/>}
-      {!image && <button onClick={handleUpload} className="button is-info is fullwidth" type="button">Upload Image</button>}
+      {image && <img src={image} alt="uploaded image"/>}
+      {!image && <button onClick={handleUpload} className="button is-info is-fullwidth" type="button">Upload Image</button>}
     </>
   )
 }
