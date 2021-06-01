@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { deleteActivity, getSingleActivity } from '../lib/api'
 import { isCreator } from '../lib/auth'
 import Error from '../common/Error'
+import Comments from './ActivityComments'
 
 
 function ActivityShow() {
@@ -29,6 +30,12 @@ function ActivityShow() {
     await deleteActivity(activityId)
     history.push('/')
   }
+
+
+
+
+
+
 
   return (
     <section className="section">
@@ -84,16 +91,7 @@ function ActivityShow() {
                 }
                 {/*COMMENT SECTION*/}
                 <div>
-                  <textarea
-                    placeholder="Add a comment"
-                    name="comments"
-                  />
-                  <div>
-                    <button type="submit">Add comment</button>
-                  </div>
-                  <div className="column">
-                    <p>FUTURE MAPBOX ZONE</p>
-                  </div>
+                  <Comments />
                 </div>
               </div>
             </div>
@@ -104,5 +102,6 @@ function ActivityShow() {
     </section>
   )
 }
+
 
 export default ActivityShow
