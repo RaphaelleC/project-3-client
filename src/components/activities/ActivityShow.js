@@ -1,8 +1,10 @@
-import React  from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React from 'react'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { deleteActivity, getSingleActivity } from '../lib/api'
 import { isCreator } from '../lib/auth'
 import Error from '../common/Error'
+import Comments from './ActivityComments'
+
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -11,14 +13,15 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 function ActivityShow() {
+  const history = useHistory()
   const { activityId } = useParams()
   const [activity, setActivity] = React.useState(null)
 
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
-  
-  
+
+
   React.useEffect(() => {
     const getData = async () => {
 
@@ -86,6 +89,8 @@ function ActivityShow() {
                 <figure className="image">
                   <img src={activity.imageUrl} alt={activity.activityName} />
                 </figure>
+
+
                 <hr />
                 <div className="columns">
                   <div className="column">
@@ -136,25 +141,18 @@ function ActivityShow() {
                             </DialogActions>
                           </Dialog>
                         </div>
-                      </div> )
+                      </div>)
                       :
                       ''
                     }
                   </div>
                   <div className="column is-half">
-                    
-                    <h4 className="title is-4 has-background-white-ter">Comments</h4>
+                    <h4 className="title is-4">Comments</h4>
                     {
                       activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
-                    }
+                    }                    
                     <div>
-                      <textarea
-                        placeholder="Add a comment"
-                        name="comments"
-                      />
-                      <div>
-                        <button type="submit">Add comment</button>
-                      </div>
+                      <Comments />
                       <div className="column">
                         <p>MAP FOR YOUR ACTIVITIES COMING VERY SOON !</p>
                       </div>
@@ -165,10 +163,11 @@ function ActivityShow() {
             )}
           </div>
         </div>
-        
+
       </div>
     </section>
   )
 }
+
 
 export default ActivityShow
