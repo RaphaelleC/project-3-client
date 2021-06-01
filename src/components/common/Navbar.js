@@ -21,6 +21,9 @@ function Navbar() {
         </div>
         <div className="navbar-item">
           <div className="navbarActivities">
+            <Link to="/search" >
+            Find an Adventure
+            </Link>
             <Link to="/summerActivities" >
             ☀️&nbsp;&nbsp;Summer Activities
             </Link>

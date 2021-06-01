@@ -22,7 +22,7 @@ input {
 
 h2 {
   font-family: 'Carter One', cursive;
-  color:white;
+  color:black;
   text-align: center;
   font-size: 80px;
   font-weight: normal;
@@ -68,8 +68,5 @@ margin-right: 20px;
   text-align: justify;
 }
 
-.map-container {
-  height: 400px;
-}
 
 @import '~bulma/bulma.sass';

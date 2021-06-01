@@ -11,8 +11,8 @@ function WinterActivityIndex() {
   React.useEffect(() => {
     const getData = async () => {
       try {
-        const res = await getAllActivities()
-        setActivities(res.data)
+        const { data } = await getAllActivities()
+        setActivities(data)
       } catch (e) {
         setIsError(true)
       }
