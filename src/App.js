@@ -9,6 +9,7 @@ import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import ActivityNew from './components/activities/ActivityNew'
 import ActivityEdit from './components/activities/ActivityEdit'
+import ActivitySearch from './components/activities/ActivitySearch'
 import SecureRoute from './components/common/SecureRoute'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <SecureRoute path="/create" component={ActivityNew} />
         <SecureRoute path="/activities/:activityId/edit" component={ActivityEdit} />
         <Route path="/activities/:activityId" component={ActivityShow} />
+        <Route path="/search" component={ActivitySearch} />
         <Route path="/summerActivities" component={summerActivitiesIndex} />
         <Route path="/winterActivities" component={winterActivitiesIndex} />
         <Route path="/register" component={Register} />
