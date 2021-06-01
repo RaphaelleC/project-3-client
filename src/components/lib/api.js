@@ -29,6 +29,18 @@ export function deleteActivity(activityId) {
   return axios.delete(`${baseUrl}/activities/${activityId}`, headers())
 }
 
+export function createComment(activityId, formdata) {
+  return axios.post(`${baseUrl}/activities/${activityId}`, formdata, headers())
+}
+
+export function getComments(activityId, formdata) {
+  return axios.get(`${baseUrl}/activities/${activityId}`, formdata, headers())
+}
+
+export function submitComment(activityId, formdata) {
+  return axios.post(`${baseUrl}/activities/${activityId}/comment`, formdata, headers())
+}
+
 export function registerUser(formdata) {
   return axios.post(`${baseUrl}/register`, formdata)
 }
