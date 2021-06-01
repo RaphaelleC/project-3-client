@@ -1,5 +1,5 @@
 import React  from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { deleteActivity, getSingleActivity } from '../lib/api'
 import { isCreator } from '../lib/auth'
 import Error from '../common/Error'
@@ -11,6 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 function ActivityShow() {
+  const history = useHistory()
   const { activityId } = useParams()
   const [activity, setActivity] = React.useState(null)
 
