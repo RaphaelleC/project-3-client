@@ -20,7 +20,20 @@ function Mapbox() {
       center: [lng, lat],
       zoom: zoom,
     })
+    // We need to fetch and loop through the data to create markers.
+    var marker = new mapboxgl.Marker({
+      color: '#FFFFFF',
+      draggable: true,
+    })
+      .setLngLat([30.5, 50.5])
+      .addTo(map.current)
+      // marker.dragend(console.log)
+    marker.on('dragend', () => {
+      const lngLat = marker.getLngLat()
+      console.log('Longitude: ' + lngLat.lng + ', Latitude: ' + lngLat.lat )
+    })
   })
+
 
   // const [activities, setActivities] = React.useState(null)
   // const [isError, setIsError] = React.useState(false)
