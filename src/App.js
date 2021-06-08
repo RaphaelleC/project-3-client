@@ -11,6 +11,7 @@ import ActivityNew from './components/activities/ActivityNew'
 import ActivityEdit from './components/activities/ActivityEdit'
 import ActivitySearch from './components/activities/ActivitySearch'
 import SecureRoute from './components/common/SecureRoute'
+import Mapbox from './components/activities/Map'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/winterActivities" component={winterActivitiesIndex} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login}/>
+        <Route path="/map" component={Mapbox} />
       </Switch>
     </Router>
   )
