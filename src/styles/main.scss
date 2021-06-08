@@ -9,9 +9,17 @@ input {
   }
 }
 
+.text-justified {
+  text-align: justify;
+}
+
 .card-header-title {
   font-family: 'Carter One', cursive;
   font-weight: normal;
+}
+
+.intro {
+  margin-top: 270px;
 }
 
 .card-image img.cardimg {
