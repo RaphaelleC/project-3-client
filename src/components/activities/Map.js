@@ -21,11 +21,11 @@ function Mapbox() {
       zoom: zoom,
     })
     // We need to fetch and loop through the data to create markers.
-    var marker = new mapboxgl.Marker({
+    const marker = new mapboxgl.Marker({
       color: '#FFFFFF',
       draggable: true,
     })
-      .setLngLat([30.5, 50.5])
+      .setLngLat([8.15, 46.27])
       .addTo(map.current)
       // marker.dragend(console.log)
     marker.on('dragend', () => {
