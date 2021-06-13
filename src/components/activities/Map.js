@@ -8,9 +8,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZHZsODIiLCJhIjoiY2twY2xkYzdtMWRwOTJ6b2c2Mm5tY
 function Mapbox() {
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [lng, setLng] = useState(-70.9)
-  const [lat, setLat] = useState(42.35)
-  const [zoom, setZoom] = useState(9)
+  const [lng, setLng] = useState(5.41)
+  const [lat, setLat] = useState(43.70)
+  const [zoom, setZoom] = useState(3)
 
   useEffect(() => {
     if (map.current) return // initialize map only once
@@ -21,11 +21,11 @@ function Mapbox() {
       zoom: zoom,
     })
     // We need to fetch and loop through the data to create markers.
-    var marker = new mapboxgl.Marker({
+    const marker = new mapboxgl.Marker({
       color: '#FFFFFF',
       draggable: true,
     })
-      .setLngLat([30.5, 50.5])
+      .setLngLat([8.15, 46.27])
       .addTo(map.current)
       // marker.dragend(console.log)
     marker.on('dragend', () => {

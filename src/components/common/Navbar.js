@@ -25,10 +25,10 @@ function Navbar() {
             Find an Adventure
             </Link>
             <Link to="/summerActivities" >
-            ☀️&nbsp;&nbsp;Summer Activities
+            Summer Activities
             </Link>
             <Link to="/winterActivities">
-            ❄️&nbsp;&nbsp;Winter Activities
+            Winter Activities
             </Link>
           </div>
         </div>
