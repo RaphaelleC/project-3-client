@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
+import mapboxgl from '!mapbox-gl'
+// import Geocoder from 'react-map-gl-geocoder'
 import Select from 'react-select'
 import useForm from '../hooks/useForm'
 import { useHistory } from 'react-router-dom'
 import { createActivity } from '../lib/api'
 import ImageUpload from '../hooks/imageUpload'
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZHZsODIiLCJhIjoiY2twY2xkYzdtMWRwOTJ6b2c2Mm5tYmQ3ZiJ9.5eRDrTf0TkOB0c6psh_oLQ'
 
 const categoryOptions = [
   { value: 'backpacking', label: 'Backpacking' },
@@ -23,7 +27,7 @@ const categoryOptions = [
 
 function ActivityNew() {
   const history = useHistory()
-  const { formdata, handleChange, handleMultiSelect, handleImageUpload, formErrors } = useForm({ 
+  const { formdata, handleChange, handleMultiSelect, handleImageUpload, formErrors } = useForm({
     country: '',
     activityName: '',
     description: '',
@@ -31,7 +35,42 @@ function ActivityNew() {
     categories: [],
     imageUrl: '',
   })
-  
+
+  const mapContainer = useRef(null)
+  const map = useRef(null)
+  const [lng, setLng] = useState(5.41)
+  const [lat, setLat] = useState(43.70)
+  const [zoom, setZoom] = useState(3)
+
+  useEffect(() => {
+    if (map.current) return // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [lng, lat],
+      zoom: zoom,
+    })
+    const marker = new mapboxgl.Marker({
+      color: '#FFFFFF',
+      draggable: true,
+    })
+      .setLngLat([8.15, 46.27])
+      .addTo(map.current)
+      // marker.dragend(console.log)
+    marker.on('dragend', () => {
+      const lngLat = marker.getLngLat()
+      console.log('Longitude: ' + lngLat.lng + ', Latitude: ' + lngLat.lat )
+    })
+    marker.on('style.load', () => {
+      marker.on('click', (e) => {
+        const coordinates = e.lngLat
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML('you clicked here: <br/>' + coordinates)
+          .addTo(map)
+      })
+    })
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -42,7 +81,6 @@ function ActivityNew() {
     } catch (err) {
       console.log(err.response.data)
     }
-      
   }
 
   console.log('formdata', formdata)
@@ -57,7 +95,7 @@ function ActivityNew() {
             <div className="field">
               <label className="label" htmlFor="country">Country</label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="country"
                   onChange={handleChange}
@@ -71,7 +109,7 @@ function ActivityNew() {
             <div className="field">
               <label className="label" htmlFor="activityName">Activity Name</label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="activityName"
                   onChange={handleChange}
@@ -85,7 +123,7 @@ function ActivityNew() {
             <div className="field">
               <label className="label" htmlFor="description">Description</label>
               <div className="control">
-                <input 
+                <input
                   className="textarea"
                   name="description"
                   value={formdata.description}
@@ -100,7 +138,7 @@ function ActivityNew() {
               <label className="label">Season:</label>
               <div className="control">
                 <label className="radio">
-                  <input 
+                  <input
                     type="radio"
                     name="season"
                     value="summer"
@@ -110,7 +148,7 @@ function ActivityNew() {
                 Summer
                 </label>
                 <label className="radio">
-                  <input 
+                  <input
                     type="radio"
                     name="season"
                     value="winter"
@@ -143,6 +181,9 @@ function ActivityNew() {
             {formErrors.imageUrl && (
               <p className="help is-danger">{formErrors.imageUrl}</p>
             )}
+            <div>
+              <div ref={mapContainer} className="map-container" />
+            </div>
             <div className="field">
               <button className="button is-fullwidth is-dark" type="submit">
             Submit
