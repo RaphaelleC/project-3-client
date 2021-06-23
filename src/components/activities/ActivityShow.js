@@ -101,6 +101,11 @@ function ActivityShow() {
                       <p>{activity.country}</p>
                       <br />
                       <h4 className="title is-4 has-background-white-ter">
+                        Location
+                      </h4>
+                      <p>{activity.location.longitude}, {activity.location.latitude}</p>
+                      <br />
+                      <h4 className="title is-4 has-background-white-ter">
                         Description
                       </h4>
                       <p className="text-justified">{activity.description}</p>
@@ -150,7 +155,7 @@ function ActivityShow() {
                     <h4 className="title is-4">Comments</h4>
                     {
                       activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
-                    }                    
+                    }
                     <div>
                       <Comments />
                       <div className="column">

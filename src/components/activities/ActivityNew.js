@@ -25,6 +25,11 @@ const categoryOptions = [
   { value: 'walking', label: 'Walking' }
 ]
 
+const defaultCoordinates = {
+  latitude: 43.70,
+  longitude: 5.41,
+}
+
 function ActivityNew() {
   const history = useHistory()
   const { formdata, handleChange, handleMultiSelect, handleImageUpload, formErrors } = useForm({
@@ -34,12 +39,14 @@ function ActivityNew() {
     season: '',
     categories: [],
     imageUrl: '',
+    location: defaultCoordinates,
   })
 
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [lng, setLng] = useState(5.41)
-  const [lat, setLat] = useState(43.70)
+
+  // const [lng, setLng] = useState(5.41)
+  // const [lat, setLat] = useState(43.70)
   const [zoom, setZoom] = useState(3)
 
   useEffect(() => {
@@ -47,7 +54,7 @@ function ActivityNew() {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [lng, lat],
+      center: [formdata.location.longitude, formdata.location.latitude],
       zoom: zoom,
     })
     const marker = new mapboxgl.Marker({
@@ -59,7 +66,16 @@ function ActivityNew() {
       // marker.dragend(console.log)
     marker.on('dragend', () => {
       const lngLat = marker.getLngLat()
-      console.log('Longitude: ' + lngLat.lng + ', Latitude: ' + lngLat.lat )
+
+      handleChange({
+        target: {
+          name: 'location',
+          value: {
+            latitude: lngLat.lat,
+            longitude: lngLat.lng,
+          },
+        },
+      })
     })
     marker.on('style.load', () => {
       marker.on('click', (e) => {
