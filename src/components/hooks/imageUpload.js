@@ -7,11 +7,11 @@ const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
 function ImageUpload({ onUpload }) {
   const [image, setImage] = React.useState(null)
 
-  // ? Below is from the docs, not React. 
+  // ? Below is from the docs, not React.
   // ? Can play around with styling
   // ? Can update 'sources' to take a URL or from INstagram (see docs)
   // ? Can also take mulitple images - again see docs
-  
+
   function handleUpload() {
     window.cloudinary
       .createUploadWidget(
