@@ -4,17 +4,17 @@ export default function useForm(initialState) {
   const [formdata, setFormdata] = React.useState(initialState)
   const [formErrors, setFormErrors] = React.useState(initialState)
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormdata(formdata => ({ ...formdata, [e.target.name]: e.target.value }))
     setFormErrors({ ...formErrors, [e.target.name]: '' })
   }
 
-  const handleMultiSelect = selectedItems => {
+  const handleMultiSelect = (selectedItems) => {
     const values = selectedItems ? selectedItems.map(item => item.value) : []
     setFormdata({ ...formdata, categories: values })
   }
 
-  const handleImageUpload = file => {
+  const handleImageUpload = (file) => {
     setFormdata({ ...formdata, imageUrl: file })
   }
 

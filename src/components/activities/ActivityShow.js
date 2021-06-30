@@ -20,11 +20,8 @@ function ActivityShow() {
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activity && !isError
 
-
-
   React.useEffect(() => {
     const getData = async () => {
-
       try {
         const { data } = await getSingleActivity(activityId)
         setActivity(data)
@@ -34,26 +31,6 @@ function ActivityShow() {
     }
     getData()
   }, [activityId])
-
-
-  // React.useEffect(() => {
-  //   if (map.current) return // initialize map only once
-  //   map.current = new mapboxgl.Map({
-  //     container: this.mapContainer.current,
-  //     style: 'mapbox://styles/mapbox/streets-v11',
-  //     center: [lng, lat],
-  //     zoom: zoom,
-  //   })
-  // })
-
-  // React.useEffect(() => {
-  //   if (!map.current) return // wait for map to initialize
-  //   map.current.on('move', () => {
-  //     setLng(map.current.getCenter().lng.toFixed(4))
-  //     setLat(map.current.getCenter().lat.toFixed(4))
-  //     setZoom(map.current.getZoom().toFixed(2))
-  //   })
-  // })
 
   const handleDelete = async () => {
     await deleteActivity(activityId)
@@ -89,8 +66,6 @@ function ActivityShow() {
                 <figure className="image">
                   <img src={activity.imageUrl} alt={activity.activityName} />
                 </figure>
-
-
                 <hr />
                 <div className="columns">
                   <div className="column">
@@ -168,11 +143,9 @@ function ActivityShow() {
             )}
           </div>
         </div>
-
       </div>
     </section>
   )
 }
-
 
 export default ActivityShow

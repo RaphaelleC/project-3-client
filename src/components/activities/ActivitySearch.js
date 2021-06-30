@@ -3,13 +3,12 @@ import Error from '../common/Error'
 import { Link } from 'react-router-dom'
 import { getAllActivities } from '../lib/api'
 
-
 function ActivitySearch() {
   const [activities, setActivities] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !activities & !isError
   const [searchTerm, setSearchTerm] = React.useState('')
-  
+
   React.useEffect(() => {
     const getData = async () => {
       try {
@@ -18,28 +17,27 @@ function ActivitySearch() {
       } catch (e) {
         setIsError(true)
       }
-      
     }
     getData()
   }, [])
-  
-  
+
   const handleInput = (e) => {
     setSearchTerm(e.target.value)
   }
-  
+
   const handleClear = () => {
     setSearchTerm('')
   }
-  
+
   const filteredActivities = activities?.filter((activity) => {
     return (
       activity.country.toLowerCase().includes(searchTerm) ||
       activity.categories.toString().toLowerCase().includes(searchTerm)
     )
   })
-  
-  
+
+  console.log(filteredActivities)
+
   return (
     <section className="hero is-fullheight-with-navbar">
       <div className="winter-background-image hero-body">
@@ -72,7 +70,6 @@ function ActivitySearch() {
                       </figure>
                     </div>
                   </div>
-        
                 </Link>
               </div>
               )
@@ -81,9 +78,7 @@ function ActivitySearch() {
         </div>
       </section>
     </section>
-    
-        
-      
   )
 }
+
 export default ActivitySearch

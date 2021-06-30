@@ -38,7 +38,6 @@ h2 {
 
 $navbar-background-color: #cccccc;
 
-
 .navbarActivities a {
 margin-right: 20px;
 }
@@ -73,11 +72,6 @@ margin-right: 20px;
 .winter-background-image {
   background-image: url('https://i.imgur.com/iYfWXFV.jpg');
   background-size: cover;
-}
-
-// For mapbox
-.map-container {
-  height: 400px;
 }
 
 @import '~bulma/bulma.sass';
