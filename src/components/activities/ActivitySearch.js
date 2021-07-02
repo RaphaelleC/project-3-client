@@ -6,7 +6,7 @@ import { getAllActivities } from '../lib/api'
 function ActivitySearch() {
   const [activities, setActivities] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
-  const isLoading = !activities & !isError
+  const isLoading = !activities && !isError
   const [searchTerm, setSearchTerm] = React.useState('')
 
   React.useEffect(() => {
@@ -52,6 +52,7 @@ function ActivitySearch() {
       <section className="section">
         <div className="container">
           <div className="columns is-multiline">
+            {console.log(isError, isLoading)}
             {isError && <Error />}
             {isLoading && <p>...loading</p>}
             {filteredActivities && (

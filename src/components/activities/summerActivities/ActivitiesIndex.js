@@ -6,7 +6,7 @@ import Error from '../../common/Error'
 function SummerActivitiesIndex() {
   const [activities, setActivities] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
-  const isLoading = !activities & !isError
+  const isLoading = !activities && !isError
 
   React.useEffect(() => {
     const getData = async () => {
