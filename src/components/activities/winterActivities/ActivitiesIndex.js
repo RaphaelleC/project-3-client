@@ -6,7 +6,7 @@ import ActivityCard from './ActivityCard'
 function WinterActivityIndex() {
   const [activities, setActivities] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
-  const isLoading = !activities & !isError
+  const isLoading = !activities && !isError
 
   React.useEffect(() => {
     const getData = async () => {

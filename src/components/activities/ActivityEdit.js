@@ -45,7 +45,7 @@ function ActivityEdit() {
     getData()
   }, [activityId, setFormdata, setFormErrors])
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
@@ -66,7 +66,7 @@ function ActivityEdit() {
             <div className="field">
               <label className="label" htmlFor="country">Country</label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="country"
                   onChange={handleChange}
@@ -80,7 +80,7 @@ function ActivityEdit() {
             <div className="field">
               <label className="label" htmlFor="activityName">Activity Name</label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="activityName"
                   onChange={handleChange}
@@ -94,7 +94,7 @@ function ActivityEdit() {
             <div className="field">
               <label className="label" htmlFor="description">Description</label>
               <div className="control">
-                <input 
+                <input
                   className="textarea"
                   name="description"
                   value={formdata.description}
@@ -109,7 +109,7 @@ function ActivityEdit() {
               <label className="label">Season:</label>
               <div className="control">
                 <label className="radio">
-                  <input 
+                  <input
                     type="radio"
                     name="season"
                     value="summer"
@@ -119,7 +119,7 @@ function ActivityEdit() {
                 Summer
                 </label>
                 <label className="radio">
-                  <input 
+                  <input
                     type="radio"
                     name="season"
                     value="winter"

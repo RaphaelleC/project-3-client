@@ -1,13 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react'
-import mapboxgl from '!mapbox-gl'
-// import Geocoder from 'react-map-gl-geocoder'
+import React from 'react'
 import Select from 'react-select'
 import useForm from '../hooks/useForm'
 import { useHistory } from 'react-router-dom'
 import { createActivity } from '../lib/api'
 import ImageUpload from '../hooks/imageUpload'
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiZHZsODIiLCJhIjoiY2twY2xkYzdtMWRwOTJ6b2c2Mm5tYmQ3ZiJ9.5eRDrTf0TkOB0c6psh_oLQ'
 
 const categoryOptions = [
   { value: 'backpacking', label: 'Backpacking' },
@@ -25,11 +21,6 @@ const categoryOptions = [
   { value: 'walking', label: 'Walking' }
 ]
 
-const defaultCoordinates = {
-  latitude: 43.70,
-  longitude: 5.41,
-}
-
 function ActivityNew() {
   const history = useHistory()
   const { formdata, handleChange, handleMultiSelect, handleImageUpload, formErrors } = useForm({
@@ -39,53 +30,6 @@ function ActivityNew() {
     season: '',
     categories: [],
     imageUrl: '',
-    location: defaultCoordinates,
-  })
-
-  const mapContainer = useRef(null)
-  const map = useRef(null)
-
-  // const [lng, setLng] = useState(5.41)
-  // const [lat, setLat] = useState(43.70)
-  const [zoom, setZoom] = useState(3)
-
-  useEffect(() => {
-    if (map.current) return // initialize map only once
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [formdata.location.longitude, formdata.location.latitude],
-      zoom: zoom,
-    })
-    const marker = new mapboxgl.Marker({
-      color: '#FFFFFF',
-      draggable: true,
-    })
-      .setLngLat([8.15, 46.27])
-      .addTo(map.current)
-      // marker.dragend(console.log)
-    marker.on('dragend', () => {
-      const lngLat = marker.getLngLat()
-
-      handleChange({
-        target: {
-          name: 'location',
-          value: {
-            latitude: lngLat.lat,
-            longitude: lngLat.lng,
-          },
-        },
-      })
-    })
-    marker.on('style.load', () => {
-      marker.on('click', (e) => {
-        const coordinates = e.lngLat
-        new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML('you clicked here: <br/>' + coordinates)
-          .addTo(map)
-      })
-    })
   })
 
   const handleSubmit = async (e) => {
@@ -95,11 +39,9 @@ function ActivityNew() {
       const res = await createActivity(formdata)
       history.push(`/activities/${res.data._id}`)
     } catch (err) {
-      console.log(err.response.data)
+      err.response.data
     }
   }
-
-  console.log('formdata', formdata)
 
   return (
     <section className="section">
@@ -197,9 +139,6 @@ function ActivityNew() {
             {formErrors.imageUrl && (
               <p className="help is-danger">{formErrors.imageUrl}</p>
             )}
-            <div>
-              <div ref={mapContainer} className="map-container" />
-            </div>
             <div className="field">
               <button className="button is-fullwidth is-dark" type="submit">
             Submit

@@ -14,8 +14,6 @@ function Register() {
     passwordConfirmation: '',
   })
 
-  // console.log('forms errors', formErrors)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -24,7 +22,7 @@ function Register() {
       history.push('/login')
     } catch (err) {
       setFormErrors(err.response.data.errors)
-      console.log(err.response.data.errors)
+      // console.log(err.response.data.errors)
     }
   }
 
@@ -39,7 +37,7 @@ function Register() {
             <div className="field">
               <label className="label">Username</label>
               <div className="control">
-                <input 
+                <input
                   className={`input ${formErrors.username ? 'is-danger' : ''}`}
                   name="username"
                   id="username"
@@ -47,7 +45,7 @@ function Register() {
                   onChange={handleChange}
                 />
               </div>
-              {formErrors.username && ( 
+              {formErrors.username && (
                 <p className="help is-danger">{formErrors.username}</p>
               )}
             </div>
@@ -56,7 +54,7 @@ function Register() {
                 Email
               </label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="email"
                   id="email"
@@ -71,7 +69,7 @@ function Register() {
                 Location
               </label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="location"
                   id="location"
@@ -85,7 +83,7 @@ function Register() {
                 Favourite Season
               </label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   name="favSeason"
                   id="favSeason"
@@ -99,7 +97,7 @@ function Register() {
                 Password
               </label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   type="password"
                   name="password"
@@ -115,7 +113,7 @@ function Register() {
                 Password Confirmation
               </label>
               <div className="control">
-                <input 
+                <input
                   className="input"
                   type="password"
                   name="passwordConfirmation"
