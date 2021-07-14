@@ -36,7 +36,7 @@ function ActivitySearch() {
     )
   })
 
-  console.log(filteredActivities)
+  // console.log(filteredActivities)
 
   return (
     <section className="hero is-fullheight-with-navbar">

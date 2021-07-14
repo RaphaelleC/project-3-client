@@ -22,7 +22,7 @@ function Register() {
       history.push('/login')
     } catch (err) {
       setFormErrors(err.response.data.errors)
-      console.log(err.response.data.errors)
+      // console.log(err.response.data.errors)
     }
   }
 

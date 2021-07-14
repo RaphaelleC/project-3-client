@@ -47,11 +47,6 @@ function ActivityShow() {
     setOpen(false)
   }
 
-  if (activity) {
-    console.log(isCreator(activity.user._id))
-    console.log(activityId)
-  }
-
   return (
     <section className="section">
       <div className="container">
