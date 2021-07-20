@@ -1,24 +1,166 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) GA London React Template
+# Project-3
 
-## Update the Proxy Server
+<h2>Overview</h2>
 
-By default, the proxy server is set up to point at port 8000, if you need to do so update in `setupProxy.js` where commented.
+<p>Our third GA project was the most complex thus far- as a trio, build and deploy a full stack MERN app. Taking the name ‘Async or Swim’ we decided to create MontVenture, an adventure based app that would allow users to search for mountain based activities in their chosen town or city. The activities would be divided into two main subgroups- Summer and Winter- and registered users could create their own ‘activity posts’, as well as leave comments on a desired activity.</p>
 
-## Using NPM
+<img src="https://i.imgur.com/RAvdPV4.png?1" alt="MontVenture logo"/>
 
-`npm run start` or `npm run dev`  to run the development server
+<h2>Brief</h2>
 
-`npm run build` to create a build directory
+<li>Application must be full-stack, and use an Express API consumed with a React front-end.</li>
+<li>Data must be served with MongoDB.</li>
+<li>Utilise multiple relationships and CRUD functionality.</li>
+<li>Have a visually impressive design.</li>
+<li>Be deployed online.</li>
+<li>Dev Time: 1 week.</li>
 
-## Using Yarn
+<h2>Technologies</h2>
 
-`yarn start` or `yarn dev`  to run the development server
+<h3>Approach Taken</h3>
 
-`yarn build` to create a build directory
+<p>Project 2 was a live sharing project over 24 hours, and being a team of three over an entire week, was not a feasible option in this case. We set up a git repository, designated sections for each team member to work on and on each commit, would coordinate to resolve conflicts that arose on each merge to ensure functionality was maintained.</p>
 
-### ⚠️
+<h3>Backend</h3>
 
-To prevent the `failed-to-compile` issue for linter errors like `no-unsed-vars`, rename the `.env.example` to `.env` and restart your development server. Note this will only change the behaviour of certain linter errors to now be warnings, and is added just to allow your code to compile in development. These errors should still be fixed and other errors will still result in the code being unable to compile
+<p>Using Mongoose as our ORM, we created our basic activities schema, including a ‘season’ field which would be used to filter the schema depends on the page the user redirects to. Once the schema was complete we created the CRUD controllers and tested each of our endpoints. The basic functionalities in place,  we then added an embedded comments schema and the extra RESTful routes for CRUD actions on the frontend SHOW pages.</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+const activitySchema = new mongoose.Schema({
+  country: { type: String, required: true },
+  activityName: { type: String, required: true },
+  description: { type: String, required: true },
+  season: { type: String, required: true },
+  categories: {
+    type: [String],
+    required: true,
+    validate: [
+      { validator: (categories) => categories.length > 0, msg: 'You must have at least one category.' }
+    ],
+  },
+  imageUrl: { type: String, required: true },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  comments: [commentSchema],
+})
+```
+```
+//embedded schema
+const commentSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+}, {
+  timestamps: true,
+})
+```
 
+<p>From here we moved onto creating register/login forms and controllers. We ensured data security by hashing the passwords with bcrypt and using pre-validate hooks to check the password and confirmation schemas match. To avoid the confirmation data being added to the database, we used a Mongoose virtual.</p>
+
+```
+schema.pre('save', function encryptedPassword(next) {
+  if (this.isModified('password')) {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync())
+  }
+  next()
+})
+
+schema.methods.validatePassword = function validatePassword(password) {
+  return bcrypt.compareSync(password, this.password)
+}
+
+schema 
+  .virtual('passwordConfirmation')
+  .set(function setPasswordConfirmation(passwordConfirmation) {
+    this._passwordConfirmation = passwordConfirmation
+  })
+
+schema
+  .pre('validate', function checkPassword(next) {
+    if (this.isModified('password') && (this.password !== this._passwordConfirmation)) {
+    // validation error.. invalidate and say whats wrong
+      this.invalidate('passwordConfirmation', 'should match password')
+    }
+    next()
+  })
+```
+
+<h3>Frontend</h3>
+
+<p>We created a 'Summer' and 'Winter' page, and within each component filtered the desired results using the 'season' object field.</p>
+
+```
+const summerFilteredActivities = activities?.filter((activity) => {
+    return (
+      activity.season.includes('summer')
+    )
+  })
+```
+```
+const winterFilteredActivities = activities?.filter((activity) => {
+    return (
+      activity.season.includes('winter')
+    )
+  })
+```
+
+<p>I then went on to create the comments function. In the interests of time I decided to leave full CRUD functionality for a later date, and focused on CREATE and UPDATE controllers. The commentSchema held a user validation so logged in users only could comment, as was the case for posting new activities.</p>
+
+<p>Since the comments could initially be created and updated, the ActivityComments component required me to import React and set state, and use an effect hook to perform getComments & handleSubmit/Change effects, using the activityId as a parameter.</p>
+
+```
+function Comments() {
+  const { activityId } = useParams()
+  const [comments, setComments] = React.useState(null)
+  const [text, setText] = React.useState('')
+  console.log(comments)
+
+  React.useEffect(() => {
+    const getData = async () => {
+      const response = await getComments(activityId)
+      console.log(response.data.comments)
+      setComments(response.data.comments)
+    }
+    getData()
+  }, [activityId])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(e)
+    try {
+      await submitComment(activityId, { text })
+      const response = await getComments(activityId)
+      setComments(response.data.comments)
+      setText('')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleChange = (e) => {
+    setText(e.target.value)
+  }
+```
+
+<p>I then imported the now complete Comments component into ActivityShow. Initially only the loading state would render- after much debugging, it was found to be a syntax error within the backend.</p>
+
+```
+<div className="column is-half">
+                    <h4 className="title is-4">Comments</h4>
+                    {
+                      activity.comments.map(comment => <p key={comment._id}>{comment.text} <br /><small>{comment.createdAt}</small></p>)
+                    }
+                    <div>
+                      <Comments />                     
+                    </div>
+                  </div>
+```
+
+
+<p>/// Screenshot to be added after bug fix ///<p>
+
+<h2>Future Features</h2>
+
+<li>Mapbox functionality- the ability to scour a digital map to find activities.</li>
+<li>‘My Activities’ page for logged in users.</li>
+<li>Adding remaining comments CRUD actions.</li>
+
+<h2>Lessons Learned</h2>
