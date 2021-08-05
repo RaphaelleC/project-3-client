@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import mapboxgl from '!mapbox-gl'
 // import Geocoder from 'react-map-gl-geocoder'
 import Select from 'react-select'
@@ -47,7 +47,7 @@ function ActivityNew() {
 
   // const [lng, setLng] = useState(5.41)
   // const [lat, setLat] = useState(43.70)
-  const [zoom, setZoom] = useState(3)
+  //const [zoom, setZoom] = useState(3)
 
   useEffect(() => {
     if (map.current) return // initialize map only once
@@ -55,7 +55,7 @@ function ActivityNew() {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [formdata.location.longitude, formdata.location.latitude],
-      zoom: zoom,
+      //zoom: zoom,
     })
     const marker = new mapboxgl.Marker({
       color: '#FFFFFF',
