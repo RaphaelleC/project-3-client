@@ -103,7 +103,7 @@ function ActivityShow() {
                       <h4 className="title is-4 has-background-white-ter">
                         Location
                       </h4>
-                      <p>{activity.location.longitude}, {activity.location.latitude}</p>
+                      {/*<p>{activity.location.longitude}, {activity.location.latitude}</p>*/}
                       <br />
                       <h4 className="title is-4 has-background-white-ter">
                         Description
